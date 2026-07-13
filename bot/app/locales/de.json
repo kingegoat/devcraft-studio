@@ -1,0 +1,53 @@
+{
+    "start": {
+        "welcome": "👋 *Willkommen bei DevCraft Studio!*\n\nIch entwickle Landingpages, Telegram-Bots und FastAPI Web-Services. Wähle eine Aktion:",
+        "choose_lang": "🌍 Sprache wählen / Choose language / Выберите язык:"
+    },
+    "menu": {
+        "services": "🛠 Leistungen",
+        "portfolio": "💼 Portfolio",
+        "contact": "✉️ Anfrage senden",
+        "about": "ℹ️ Über",
+        "back": "⬅️ Zurück"
+    },
+    "services": {
+        "title": "*Leistungen & Preise*\n\nWähle, was du brauchst:",
+        "landing": {
+            "title": "🌐 Landingpages & Visitenkarten",
+            "text": "Responsives Layout, sauberer Code, sofortiger Ladevorgang.\nDauer: 3–7 Tage.\nPreis: ab {price}.",
+            "cta": "Landingpage bestellen"
+        },
+        "bot": {
+            "title": "🤖 Telegram-Bots",
+            "text": "Vom FAQ-Bot bis zum komplexen System mit Zahlungen und CRM.\nDauer: 5–14 Tage.\nPreis: ab {price}.",
+            "cta": "Bot bestellen"
+        },
+        "api": {
+            "title": "⚙️ Web-Services & APIs",
+            "text": "FastAPI/Django Backend mit REST, DB, Docker-Deployment.\nDauer: 7–21 Tage.\nPreis: ab {price}.",
+            "cta": "Projekt besprechen"
+        }
+    },
+    "portfolio": {
+        "title": "*Portfolio*\n\nAusgewählte Projekte. Vollständige Liste auf der Webseite.",
+        "item": "▸ *{title}*\n{description}\nStack: {stack}\n🔗 {url}",
+        "open_site": "🌐 Webseite öffnen"
+    },
+    "contact": {
+        "ask_name": "Wie heißt du?",
+        "ask_email": "Schön! Jetzt deine E-Mail, damit ich mich melden kann:",
+        "ask_message": "Beschreibe kurz die Aufgabe:",
+        "invalid_email": "Die E-Mail sieht nicht korrekt aus. Versuche es erneut:",
+        "thanks": "✅ *Danke, {name}!* Anfrage #{id} erhalten. Ich melde mich innerhalb von 2 Stunden.",
+        "skip": "Überspringen",
+        "back": "Abbrechen"
+    },
+    "about": {
+        "text": "*DevCraft Studio*\n\nFull-Stack-Entwicklung seit 2021.\n• 40+ Projekte\n• Stack: Python, FastAPI, Django, aiogram, PostgreSQL, Docker\n• 12+ UI-Sprachen\n• Lokalisierung: RU / EN / DE / ES / FR\n\nOpen Source auf GitHub."
+    },
+    "btn": {
+        "yes": "Ja",
+        "no": "Nein",
+        "back": "Zurück"
+    }
+}

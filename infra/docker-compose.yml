@@ -1,0 +1,94 @@
+name: devcraft-studio
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: devcraft-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://devcraft:devcraft@db:5432/devcraft}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-change-me-in-prod}
+      BOT_NOTIFY_URL: ${BOT_NOTIFY_URL:-http://bot:8080/internal/notify}
+      SERVE_SITE: "true"
+      CORS_ORIGINS: '["*"]'
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - api-data:/srv/app/data
+    networks:
+      - devcraft
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    container_name: devcraft-bot
+    restart: unless-stopped
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN:?set BOT_TOKEN in .env}
+      BOT_MODE: ${BOT_MODE:-webhook}
+      WEBHOOK_URL: ${WEBHOOK_URL:-}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-}
+      API_BASE_URL: http://api:8000
+      API_ADMIN_TOKEN: ${ADMIN_TOKEN:-change-me-in-prod}
+      ADMIN_CHAT_IDS: ${ADMIN_CHAT_IDS:-}
+      BOT_HOST: 0.0.0.0
+      BOT_PORT: 8080
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - bot-data:/srv/app/data
+    networks:
+      - devcraft
+
+  db:
+    image: postgres:16-alpine
+    container_name: devcraft-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: devcraft
+      POSTGRES_PASSWORD: devcraft
+      POSTGRES_DB: devcraft
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - devcraft
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devcraft -d devcraft"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: devcraft-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/certs:/etc/nginx/certs:ro
+    depends_on:
+      - api
+      - bot
+    networks:
+      - devcraft
+
+volumes:
+  api-data:
+  bot-data:
+  db-data:
+
+networks:
+  devcraft:
+    driver: bridge

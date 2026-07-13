@@ -1,0 +1,53 @@
+{
+    "start": {
+        "welcome": "👋 *Welcome to DevCraft Studio!*\n\nI build landing pages, Telegram bots and FastAPI web services. Pick an action:",
+        "choose_lang": "🌍 Choose language / Выберите язык / Sprache wählen:"
+    },
+    "menu": {
+        "services": "🛠 Services",
+        "portfolio": "💼 Portfolio",
+        "contact": "✉️ Send a request",
+        "about": "ℹ️ About",
+        "back": "⬅️ Back"
+    },
+    "services": {
+        "title": "*Services & pricing*\n\nPick what you need:",
+        "landing": {
+            "title": "🌐 Landing pages & business cards",
+            "text": "Responsive layout, clean code, instant load.\nTimeline: 3–7 days.\nPrice: from {price}.",
+            "cta": "Order a landing"
+        },
+        "bot": {
+            "title": "🤖 Telegram bots",
+            "text": "From FAQ bots to complex systems with payments and CRM.\nTimeline: 5–14 days.\nPrice: from {price}.",
+            "cta": "Order a bot"
+        },
+        "api": {
+            "title": "⚙️ Web services & APIs",
+            "text": "FastAPI/Django backend with REST, DB, Docker deploy.\nTimeline: 7–21 days.\nPrice: from {price}.",
+            "cta": "Discuss a project"
+        }
+    },
+    "portfolio": {
+        "title": "*Portfolio*\n\nSelected projects. See the full list on the website.",
+        "item": "▸ *{title}*\n{description}\nStack: {stack}\n🔗 {url}",
+        "open_site": "🌐 Open site"
+    },
+    "contact": {
+        "ask_name": "What's your name?",
+        "ask_email": "Nice to meet you! Now drop your email so I can reach back:",
+        "ask_message": "Briefly describe the task:",
+        "invalid_email": "That email doesn't look right. Try again:",
+        "thanks": "✅ *Thanks, {name}!* Request #{id} received. I'll reply within 2 hours.",
+        "skip": "Skip",
+        "back": "Cancel"
+    },
+    "about": {
+        "text": "*DevCraft Studio*\n\nFull-stack development since 2021.\n• 40+ projects shipped\n• Stack: Python, FastAPI, Django, aiogram, PostgreSQL, Docker\n• 12+ UI languages\n• Localization: RU / EN / DE / ES / FR\n\nOpen source on GitHub."
+    },
+    "btn": {
+        "yes": "Yes",
+        "no": "No",
+        "back": "Back"
+    }
+}

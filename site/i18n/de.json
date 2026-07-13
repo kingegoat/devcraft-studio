@@ -1,0 +1,136 @@
+{
+    "meta": {
+        "title": "DevCraft Studio — Full-Stack-Entwicklung",
+        "description": "DevCraft Studio entwickelt Landingpages, Telegram-Bots und Web-Services. Komplett: Design, Backend, Deployment."
+    },
+    "nav": {
+        "skip": "Zum Inhalt springen",
+        "services": "Leistungen",
+        "work": "Arbeiten",
+        "process": "Prozess",
+        "stack": "Stack",
+        "contact": "Kontakt",
+        "cta": "Projekt starten"
+    },
+    "hero": {
+        "eyebrow": "Offen für Projekte in Q3",
+        "title": {
+            "1": "Ich baue Produkte,",
+            "2": "die Menschen nutzen."
+        },
+        "sub": "Landingpages, Telegram-Bots, FastAPI Web-Services. Komplette Umsetzung: von Idee und Design bis Deployment und Analytics. Sauberer Code, schnelle Lieferung, kein Boilerplate.",
+        "cta": {
+            "primary": "Projekt starten",
+            "secondary": "Arbeiten ansehen"
+        },
+        "stats": {
+            "1": "Projekte",
+            "2": "Jahre Erfahrung",
+            "3": "UI-Sprachen"
+        }
+    },
+    "services": {
+        "eyebrow": "Was ich tue",
+        "title": "Leistungen",
+        "lead": "Drei Richtungen, ein Stack. Ich wähle das richtige Werkzeug für die Aufgabe — nicht umgekehrt.",
+        "1": {
+            "title": "Landingpages & Visitenkarten",
+            "text": "Responsives Layout, sauberer Code, sofortiger Ladevorgang. Mobile-first, cross-browser, SEO-ready.",
+            "f1": "Mobile-first Responsive",
+            "f2": "Animationen & Interaktion",
+            "f3": "SEO und OpenGraph"
+        },
+        "2": {
+            "badge": "Beliebt",
+            "title": "Telegram-Bots",
+            "text": "Vom einfachen FAQ-Bot bis zum komplexen System mit Zahlungen, CRM-Integration und Admin-Panel.",
+            "f1": "aiogram 3, Webhooks",
+            "f2": "Telegram Stars Zahlungen",
+            "f3": "Inline-Modus und FSM"
+        },
+        "3": {
+            "title": "Web-Services & APIs",
+            "text": "FastAPI/Django Backend mit REST, Authentifizierung, PostgreSQL und Docker-Deployment.",
+            "f1": "REST + WebSocket",
+            "f2": "JWT, OAuth2",
+            "f3": "CI/CD und Monitoring"
+        }
+    },
+    "work": {
+        "eyebrow": "Ausgewählte Arbeiten",
+        "title": "Projekte",
+        "lead": "Live-Projekte — Open Source auf GitHub. Code einsehen, deployen, forken.",
+        "1": {
+            "tag": "Landing",
+            "title": "Fintess — Fitnesstrainer",
+            "text": "Responsive Landing mit Kursbuchung und Telegram-Integration."
+        },
+        "2": {
+            "tag": "SaaS",
+            "title": "LeadFlow — Leads CRM",
+            "text": "FastAPI + PostgreSQL Web-Service mit Telegram-Benachrichtigungen."
+        },
+        "3": {
+            "tag": "Bot",
+            "title": "OrderBot — Bestellannahme",
+            "text": "aiogram 3 Telegram-Bot mit FSM, Zahlungen und Admin-Panel."
+        },
+        "4": {
+            "tag": "Mehrsprachig",
+            "title": "Polyglot UI",
+            "text": "UI-Kit mit RU/EN/DE/ES/FR Wechsel ohne Seiten-Neuladen."
+        }
+    },
+    "process": {
+        "eyebrow": "Wie ich arbeite",
+        "title": "Prozess",
+        "1": { "title": "Briefing", "text": "Wir besprechen Ziele, Zielgruppe, Zeitplan. Keine 20-Seiten-Spezifikationen — ein Chat reicht." },
+        "2": { "title": "Prototyp", "text": "In 1–2 Tagen zeige ich Struktur und Stil. Wir stimmen bis ins Detail ab." },
+        "3": { "title": "Entwicklung", "text": "Sauberer Code, regelmäßige Demos. Sie sehen täglich Fortschritt." },
+        "4": { "title": "Launch", "text": "Deployment, Domain-Setup, Analytics, Zugänge übergeben." }
+    },
+    "stack": {
+        "eyebrow": "Werkzeuge",
+        "title": "Stack",
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "data": "Daten",
+        "devops": "DevOps",
+        "integrations": "Integrationen",
+        "ai": "KI-gestützt"
+    },
+    "contact": {
+        "eyebrow": "Kontakt",
+        "title": "Erzählen Sie mir von Ihrem Projekt",
+        "lead": "Ich antworte innerhalb von 2 Stunden während der Arbeitszeit. Kein Spam — nur Relevantes.",
+        "ch1": { "label": "Telegram" },
+        "ch2": { "label": "E-Mail" },
+        "ch3": { "label": "GitHub" }
+    },
+    "form": {
+        "name": "Name",
+        "email": "E-Mail",
+        "service": "Leistung",
+        "serviceOption": {
+            "placeholder": "Leistung wählen",
+            "landing": "Landingpage",
+            "bot": "Telegram-Bot",
+            "api": "Web-Service / API",
+            "other": "Andere"
+        },
+        "message": "Nachricht",
+        "submit": "Senden",
+        "success": "Danke! Ich melde mich innerhalb von 2 Stunden.",
+        "queued": "Gespeichert — ich sende es bei erster Gelegenheit.",
+        "errFill": "Bitte alle Felder korrekt ausfüllen",
+        "err": {
+            "name": "Bitte Namen eingeben",
+            "email": "Gültige E-Mail erforderlich",
+            "message": "Mindestens 10 Zeichen"
+        }
+    },
+    "footer": {
+        "tagline": "Full-Stack-Entwicklung. Landingpages, Bots, APIs.",
+        "made": "Gemacht mit ☕ und sauberem Code"
+    }
+}

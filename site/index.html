@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0d12">
+    <meta name="description" content="DevCraft Studio — разработка лендингов, Telegram-ботов и веб-сервисов. Полный цикл: дизайн, backend, деплой." data-i18n-attr="description" data-i18n="meta.description">
+    <meta name="keywords" content="лендинг, telegram bot, fastapi, fullstack, веб-разработка, адаптивный сайт, devcraft">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DevCraft Studio — full-stack разработка">
+    <meta property="og:description" content="Лендинги, боты и веб-сервисы. От идеи до деплоя.">
+    <meta property="og:image" content="/assets/og-cover.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title data-i18n="meta.title">DevCraft Studio — full-stack разработка</title>
+</head>
+<body>
+    <a class="skip-link" href="#main" data-i18n="nav.skip">Перейти к содержимому</a>
+
+    <!-- ============ HEADER ============ -->
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#top" aria-label="DevCraft Studio">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" width="28" height="28">
+                        <defs>
+                            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#7c5cff"/>
+                                <stop offset="100%" stop-color="#22d3ee"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="3" y="3" width="26" height="26" rx="7" fill="url(#lg)"/>
+                        <path d="M10 22 L16 8 L22 22 M12.5 17 H19.5" stroke="#0b0d12" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </span>
+                <span class="brand-name">DevCraft<span class="brand-dot">.</span></span>
+            </a>
+
+            <nav class="nav-primary" aria-label="Primary">
+                <a href="#services" data-i18n="nav.services">Услуги</a>
+                <a href="#portfolio" data-i18n="nav.work">Работы</a>
+                <a href="#process" data-i18n="nav.process">Процесс</a>
+                <a href="#stack" data-i18n="nav.stack">Стек</a>
+                <a href="#contact" data-i18n="nav.contact">Контакты</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="lang-switch" role="group" aria-label="Language">
+                    <button class="lang-btn is-active" data-lang="ru" aria-pressed="true">RU</button>
+                    <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+                    <button class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+                        <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <line x1="12" y1="2" x2="12" y2="5"/>
+                            <line x1="12" y1="19" x2="12" y2="22"/>
+                            <line x1="2" y1="12" x2="5" y2="12"/>
+                            <line x1="19" y1="12" x2="22" y2="12"/>
+                            <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/>
+                            <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/>
+                            <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/>
+                            <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/>
+                        </g>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+                    </svg>
+                </button>
+                <a class="btn btn-primary btn-sm hide-mobile" href="#contact" data-i18n="nav.cta">Обсудить проект</a>
+                <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+            <a href="#services" data-i18n="nav.services">Услуги</a>
+            <a href="#portfolio" data-i18n="nav.work">Работы</a>
+            <a href="#process" data-i18n="nav.process">Процесс</a>
+            <a href="#stack" data-i18n="nav.stack">Стек</a>
+            <a href="#contact" data-i18n="nav.contact">Контакты</a>
+            <a class="btn btn-primary" href="#contact" data-i18n="nav.cta">Обсудить проект</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- ============ HERO ============ -->
+        <section class="hero" id="top">
+            <div class="hero-bg" aria-hidden="true">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="grid-overlay"></div>
+            </div>
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <span class="eyebrow">
+                        <span class="dot"></span>
+                        <span data-i18n="hero.eyebrow">Открыт для проектов в Q3</span>
+                    </span>
+                    <h1 class="hero-title">
+                        <span data-i18n="hero.title.1">Делаю продукты,</span>
+                        <span class="gradient-text" data-i18n="hero.title.2">которыми пользуются.</span>
+                    </h1>
+                    <p class="hero-sub" data-i18n="hero.sub">
+                        Лендинги, Telegram-боты, веб-сервисы на FastAPI. Полный цикл: от идеи и дизайна до деплоя и аналитики. Чистый код, быстрый результат, никакого бойлерплейта.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#contact">
+                            <span data-i18n="hero.cta.primary">Начать проект</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a class="btn btn-ghost" href="#portfolio" data-i18n="hero.cta.secondary">Смотреть работы</a>
+                    </div>
+                    <ul class="hero-stats" role="list">
+                        <li>
+                            <strong>40+</strong>
+                            <span data-i18n="hero.stats.1">проектов</span>
+                        </li>
+                        <li>
+                            <strong>5 лет</strong>
+                            <span data-i18n="hero.stats.2">в разработке</span>
+                        </li>
+                        <li>
+                            <strong>12+</strong>
+                            <span data-i18n="hero.stats.3">языков интерфейса</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="code-card">
+                        <div class="code-head">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="code-title">main.py</span>
+                        </div>
+                        <pre class="code-body"><code><span class="c-kw">from</span> <span class="c-mod">fastapi</span> <span class="c-kw">import</span> FastAPI
+<span class="c-kw">from</span> <span class="c-mod">aiogram</span> <span class="c-kw">import</span> Bot, Dispatcher
+
+<span class="c-cm"># one stack — every surface</span>
+app <span class="c-op">=</span> <span class="c-fn">FastAPI</span>()
+bot <span class="c-op">=</span> <span class="c-fn">Bot</span>(token<span class="c-op">=</span>settings.<span class="c-fn">token</span>)
+dp  <span class="c-op">=</span> <span class="c-fn">Dispatcher</span>()
+
+<span class="c-op">@</span>app.<span class="c-fn">post</span>(<span class="c-str">"/lead"</span>)
+<span class="c-kw">async def</span> <span class="c-fn">lead</span>(data: Lead):
+    <span class="c-kw">await</span> bot.<span class="c-fn">send_message</span>(chat_id, data.<span class="c-fn">text</span>)
+    <span class="c-kw">return</span> {<span class="c-str">"ok"</span>: <span class="c-bool">True</span>}</code></pre>
+                    </div>
+                    <div class="float-tag tag-1">⚡ FastAPI</div>
+                    <div class="float-tag tag-2">🤖 aiogram 3</div>
+                    <div class="float-tag tag-3">🌍 12+ i18n</div>
+                </div>
+            </div>
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee-track">
+                    <span>HTML5</span><span>·</span><span>CSS3</span><span>·</span><span>JavaScript</span><span>·</span>
+                    <span>TypeScript</span><span>·</span><span>Python</span><span>·</span><span>FastAPI</span><span>·</span>
+                    <span>Django</span><span>·</span><span>aiogram</span><span>·</span><span>PostgreSQL</span><span>·</span>
+                    <span>SQLite</span><span>·</span><span>Redis</span><span>·</span><span>Docker</span><span>·</span>
+                    <span>Nginx</span><span>·</span><span>Linux</span><span>·</span><span>Git</span><span>·</span>
+                    <span>HTML5</span><span>·</span><span>CSS3</span><span>·</span><span>JavaScript</span><span>·</span>
+                    <span>TypeScript</span><span>·</span><span>Python</span><span>·</span><span>FastAPI</span><span>·</span>
+                    <span>Django</span><span>·</span><span>aiogram</span><span>·</span><span>PostgreSQL</span><span>·</span>
+                    <span>SQLite</span><span>·</span><span>Redis</span><span>·</span><span>Docker</span><span>·</span>
+                    <span>Nginx</span><span>·</span><span>Linux</span><span>·</span><span>Git</span><span>·</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SERVICES ============ -->
+        <section class="section" id="services">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow" data-i18n="services.eyebrow">Что я делаю</span>
+                    <h2 class="section-title" data-i18n="services.title">Услуги</h2>
+                    <p class="section-lead" data-i18n="services.lead">Три направления — один стек. Подбираю инструмент под задачу, а не наоборот.</p>
+                </header>
+                <div class="cards-grid">
+                    <article class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M3 12h18M3 17h12"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="services.1.title">Лендинги и сайты-визитки</h3>
+                        <p data-i18n="services.1.text">Адаптивная вёрстка, чистый код, мгновенная загрузка. Mobile-first, кроссбраузерно, SEO-ready.</p>
+                        <ul class="card-list">
+                            <li data-i18n="services.1.f1">Mobile-first адаптив</li>
+                            <li data-i18n="services.1.f2">Анимации и интерактив</li>
+                            <li data-i18n="services.1.f3">SEO и OpenGraph</li>
+                        </ul>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </article>
+
+                    <article class="card card-featured">
+                        <span class="badge" data-i18n="services.2.badge">Хит</span>
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="services.2.title">Telegram-боты</h3>
+                        <p data-i18n="services.2.text">От простого FAQ-бота до сложной системы с оплатой, CRM-интеграцией и админ-панелью.</p>
+                        <ul class="card-list">
+                            <li data-i18n="services.2.f1">aiogram 3, webhook</li>
+                            <li data-i18n="services.2.f2">Платежи Telegram Stars</li>
+                            <li data-i18n="services.2.f3">Inline-режим и FSM</li>
+                        </ul>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v6H4zM4 14h16v6H4z M8 7h.01M8 17h.01"/>
+                            </svg>
+                        </div>
+                        <h3 data-i18n="services.3.title">Веб-сервисы и API</h3>
+                        <p data-i18n="services.3.text">FastAPI/Django backend с REST, авторизацией, PostgreSQL и деплоем в Docker.</p>
+                        <ul class="card-list">
+                            <li data-i18n="services.3.f1">REST + WebSocket</li>
+                            <li data-i18n="services.3.f2">JWT, OAuth2</li>
+                            <li data-i18n="services.3.f3">CI/CD и мониторинг</li>
+                        </ul>
+                        <span class="card-arrow" aria-hidden="true">→</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PORTFOLIO ============ -->
+        <section class="section section-alt" id="portfolio">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow" data-i18n="work.eyebrow">Избранное</span>
+                    <h2 class="section-title" data-i18n="work.title">Работы</h2>
+                    <p class="section-lead" data-i18n="work.lead">Живые проекты — открытые репозитории на GitHub. Код можно посмотреть, развернуть, форкнуть.</p>
+                </header>
+                <div class="work-grid">
+                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
+                        <div class="work-cover work-cover-1" aria-hidden="true"></div>
+                        <div class="work-meta">
+                            <span class="work-tag" data-i18n="work.1.tag">Лендинг</span>
+                            <h3 data-i18n="work.1.title">Fintess — фитнес-тренер</h3>
+                            <p data-i18n="work.1.text">Адаптивный лендинг с записью на тренировки и интеграцией Telegram.</p>
+                            <div class="work-stack"><span>HTML</span><span>CSS</span><span>JS</span></div>
+                        </div>
+                    </a>
+                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
+                        <div class="work-cover work-cover-2" aria-hidden="true"></div>
+                        <div class="work-meta">
+                            <span class="work-tag" data-i18n="work.2.tag">SaaS</span>
+                            <h3 data-i18n="work.2.title">LeadFlow — CRM лидов</h3>
+                            <p data-i18n="work.2.text">Веб-сервис на FastAPI + PostgreSQL с Telegram-уведомлениями.</p>
+                            <div class="work-stack"><span>Python</span><span>FastAPI</span><span>Postgres</span></div>
+                        </div>
+                    </a>
+                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
+                        <div class="work-cover work-cover-3" aria-hidden="true"></div>
+                        <div class="work-meta">
+                            <span class="work-tag" data-i18n="work.3.tag">Bot</span>
+                            <h3 data-i18n="work.3.title">OrderBot — приём заказов</h3>
+                            <p data-i18n="work.3.text">Telegram-бот на aiogram 3 с FSM, оплатой и админ-панелью.</p>
+                            <div class="work-stack"><span>aiogram</span><span>SQLite</span><span>Docker</span></div>
+                        </div>
+                    </a>
+                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
+                        <div class="work-cover work-cover-4" aria-hidden="true"></div>
+                        <div class="work-meta">
+                            <span class="work-tag" data-i18n="work.4.tag">Multilang</span>
+                            <h3 data-i18n="work.4.title">Polyglot UI</h3>
+                            <p data-i18n="work.4.text">UI-кит с переключением RU/EN/DE/ES/FR без перезагрузки страницы.</p>
+                            <div class="work-stack"><span>i18n</span><span>CSS vars</span><span>Vanilla JS</span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PROCESS ============ -->
+        <section class="section" id="process">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow" data-i18n="process.eyebrow">Как я работаю</span>
+                    <h2 class="section-title" data-i18n="process.title">Процесс</h2>
+                </header>
+                <ol class="steps" role="list">
+                    <li class="step">
+                        <span class="step-num">01</span>
+                        <h3 data-i18n="process.1.title">Бриф</h3>
+                        <p data-i18n="process.1.text">Обсуждаем цели, аудиторию, сроки. Никаких ТЗ на 20 страниц — хватает чата.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">02</span>
+                        <h3 data-i18n="process.2.title">Прототип</h3>
+                        <p data-i18n="process.2.text">За 1–2 дня показываю структуру и стиль. Согласуем до пикселя.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">03</span>
+                        <h3 data-i18n="process.3.title">Разработка</h3>
+                        <p data-i18n="process.3.text">Чистый код, регулярные демо. Видите прогресс каждый день.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">04</span>
+                        <h3 data-i18n="process.4.title">Запуск</h3>
+                        <p data-i18n="process.4.text">Деплой, настройка домена, аналитика, передача доступов.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============ STACK ============ -->
+        <section class="section section-alt" id="stack">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow" data-i18n="stack.eyebrow">Инструменты</span>
+                    <h2 class="section-title" data-i18n="stack.title">Стек</h2>
+                </header>
+                <div class="stack-grid">
+                    <div class="stack-group">
+                        <h4 data-i18n="stack.frontend">Frontend</h4>
+                        <ul>
+                            <li>HTML5 · CSS3 · SCSS</li>
+                            <li>JavaScript (ES2024) · TypeScript</li>
+                            <li>Vanilla DOM, no heavy frameworks</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h4 data-i18n="stack.backend">Backend</h4>
+                        <ul>
+                            <li>Python · FastAPI · Django · Flask</li>
+                            <li>Node.js · Express</li>
+                            <li>C++ bindings (по необходимости)</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h4 data-i18n="stack.data">Data</h4>
+                        <ul>
+                            <li>PostgreSQL · SQLite · Redis</li>
+                            <li>SQLAlchemy · Alembic</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h4 data-i18n="stack.devops">DevOps</h4>
+                        <ul>
+                            <li>Docker · docker-compose</li>
+                            <li>Nginx · Linux · systemd</li>
+                            <li>GitHub Actions · CI/CD</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h4 data-i18n="stack.integrations">Integrations</h4>
+                        <ul>
+                            <li>Telegram Bot API (aiogram 3)</li>
+                            <li>Stripe · Telegram Stars</li>
+                            <li>12+ языков интерфейса</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h4 data-i18n="stack.ai">AI-assisted</h4>
+                        <ul>
+                            <li>Генерация компонентов</li>
+                            <li>Рефакторинг и тесты</li>
+                            <li>Документация</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CONTACT ============ -->
+        <section class="section" id="contact">
+            <div class="container contact-inner">
+                <div class="contact-copy">
+                    <span class="section-eyebrow" data-i18n="contact.eyebrow">Контакты</span>
+                    <h2 class="section-title" data-i18n="contact.title">Расскажите о задаче</h2>
+                    <p class="section-lead" data-i18n="contact.lead">Отвечаю в течение 2 часов в рабочее время. Без спама — только по делу.</p>
+
+                    <ul class="contact-channels">
+                        <li>
+                            <span class="ch-label" data-i18n="contact.ch1.label">Telegram</span>
+                            <a href="https://t.me/" target="_blank" rel="noopener">@devcraft</a>
+                        </li>
+                        <li>
+                            <span class="ch-label" data-i18n="contact.ch2.label">Email</span>
+                            <a href="mailto:hello@devcraft.studio">hello@devcraft.studio</a>
+                        </li>
+                        <li>
+                            <span class="ch-label" data-i18n="contact.ch3.label">GitHub</span>
+                            <a href="https://github.com/" target="_blank" rel="noopener">github.com/devcraft</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <form class="contact-form" id="lead-form" novalidate>
+                    <div class="field">
+                        <label for="name" data-i18n="form.name">Имя</label>
+                        <input id="name" name="name" type="text" required autocomplete="name" minlength="2">
+                        <span class="field-error" data-i18n="form.err.name">Укажите имя</span>
+                    </div>
+                    <div class="field">
+                        <label for="email" data-i18n="form.email">Email</label>
+                        <input id="email" name="email" type="email" required autocomplete="email">
+                        <span class="field-error" data-i18n="form.err.email">Корректный email</span>
+                    </div>
+                    <div class="field">
+                        <label for="service" data-i18n="form.service">Услуга</label>
+                        <select id="service" name="service" required>
+                            <option value="" data-i18n="form.serviceOption.placeholder">Выберите услугу</option>
+                            <option value="landing" data-i18n="form.serviceOption.landing">Лендинг</option>
+                            <option value="bot" data-i18n="form.serviceOption.bot">Telegram-бот</option>
+                            <option value="api" data-i18n="form.serviceOption.api">Веб-сервис / API</option>
+                            <option value="other" data-i18n="form.serviceOption.other">Другое</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="message" data-i18n="form.message">Сообщение</label>
+                        <textarea id="message" name="message" rows="4" required minlength="10"></textarea>
+                        <span class="field-error" data-i18n="form.err.message">Минимум 10 символов</span>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit" id="submit-btn">
+                        <span data-i18n="form.submit">Отправить</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                    </button>
+                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="brand-name">DevCraft<span class="brand-dot">.</span></span>
+                <p data-i18n="footer.tagline">Full-stack разработка. Лендинги, боты, API.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#services" data-i18n="nav.services">Услуги</a>
+                <a href="#portfolio" data-i18n="nav.work">Работы</a>
+                <a href="#contact" data-i18n="nav.contact">Контакты</a>
+            </div>
+            <div class="footer-meta">
+                <span>© <span id="year">2026</span> DevCraft Studio</span>
+                <span data-i18n="footer.made">Сделано с ☕ и чистым кодом</span>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>
