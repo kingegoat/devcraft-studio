@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0d12">
+    <title>DevCraft · Admin · Leads</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .admin-shell { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+        .admin-head {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 16px; flex-wrap: wrap;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--c-border);
+        }
+        .admin-head h1 {
+            font-size: 24px; font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            padding: 20px 24px;
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-md);
+        }
+        .stat-card .stat-label {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--c-text-muted); margin-bottom: 8px;
+        }
+        .stat-card .stat-value {
+            font-size: 28px; font-weight: 700;
+            font-family: var(--font-mono);
+        }
+        .stat-card.is-new .stat-value { color: var(--c-accent); }
+        .stat-card.is-won .stat-value { color: #34d399; }
+        .stat-card.is-lost .stat-value { color: #f87171; }
+
+        .toolbar {
+            display: flex; gap: 12px; flex-wrap: wrap;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .toolbar select, .toolbar input {
+            padding: 10px 14px;
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        .toolbar select:focus, .toolbar input:focus {
+            outline: none;
+            border-color: var(--c-accent);
+        }
+        .toolbar input { flex: 1; min-width: 240px; }
+
+        .leads-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .leads-table th {
+            text-align: left;
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--c-text-muted);
+            padding: 14px 16px;
+            background: var(--c-surface-2);
+            border-bottom: 1px solid var(--c-border);
+            position: sticky; top: 0;
+        }
+        .leads-table td {
+            padding: 14px 16px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--c-border);
+            vertical-align: top;
+        }
+        .leads-table tr:last-child td { border-bottom: none; }
+        .leads-table tr:hover td { background: color-mix(in oklab, var(--c-surface-2) 50%, transparent); }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .badge-new       { background: rgba(59, 130, 246, 0.18); color: #60a5fa; }
+        .badge-contacted { background: rgba(251, 191, 36, 0.18); color: #fbbf24; }
+        .badge-won       { background: rgba(52, 211, 153, 0.18); color: #34d399; }
+        .badge-lost      { background: rgba(248, 113, 113, 0.18); color: #f87171; }
+
+        .action-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--c-border);
+            background: var(--c-surface-2);
+            color: var(--c-text);
+            cursor: pointer;
+            margin-right: 4px;
+            transition: all 0.15s;
+        }
+        .action-btn:hover { border-color: var(--c-accent); color: var(--c-accent); }
+        .action-btn.is-won { color: #34d399; }
+        .action-btn.is-won:hover { background: rgba(52, 211, 153, 0.12); border-color: #34d399; }
+        .action-btn.is-lost { color: #f87171; }
+        .action-btn.is-lost:hover { background: rgba(248, 113, 113, 0.12); border-color: #f87171; }
+        .action-btn.is-reset { color: var(--c-text-muted); }
+
+        .row-message {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--c-text-dim);
+            max-width: 360px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .row-email { font-family: var(--font-mono); font-size: 13px; }
+        .row-time  { font-family: var(--font-mono); font-size: 12px; color: var(--c-text-muted); white-space: nowrap; }
+
+        .empty-state {
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--c-text-muted);
+            background: var(--c-surface);
+            border: 1px dashed var(--c-border);
+            border-radius: var(--radius-md);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px; left: 50%; transform: translateX(-50%);
+            padding: 12px 24px;
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: 999px;
+            box-shadow: var(--shadow-md);
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+        .toast.is-visible { opacity: 1; }
+        .toast.is-success { border-color: #34d399; color: #34d399; }
+        .toast.is-error   { border-color: #f87171; color: #f87171; }
+
+        @media (max-width: 900px) {
+            .leads-table thead { display: none; }
+            .leads-table, .leads-table tbody, .leads-table tr, .leads-table td { display: block; width: 100%; }
+            .leads-table tr { padding: 16px 0; border-bottom: 1px solid var(--c-border); }
+            .leads-table td { border: none; padding: 6px 16px; }
+            .leads-table td:before {
+                content: attr(data-label);
+                display: block;
+                font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+                color: var(--c-text-muted);
+                margin-bottom: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-shell">
+        <header class="admin-head">
+            <div>
+                <a href="../" style="color: var(--c-text-muted); font-size: 13px;">← На сайт</a>
+                <h1>DevCraft · Leads</h1>
+            </div>
+            <div class="toolbar" style="margin: 0;">
+                <button id="refresh-btn" class="action-btn">↻ Обновить</button>
+                <button id="logout-btn" class="action-btn is-reset">Выйти</button>
+            </div>
+        </header>
+
+        <div class="admin-stats">
+            <div class="stat-card">
+                <div class="stat-label">Всего</div>
+                <div class="stat-value" id="stat-total">—</div>
+            </div>
+            <div class="stat-card is-new">
+                <div class="stat-label">Новые</div>
+                <div class="stat-value" id="stat-new">—</div>
+            </div>
+            <div class="stat-card is-won">
+                <div class="stat-label">В работе / выиграны</div>
+                <div class="stat-value" id="stat-won">—</div>
+            </div>
+            <div class="stat-card is-lost">
+                <div class="stat-label">Потеряны</div>
+                <div class="stat-value" id="stat-lost">—</div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <select id="filter-status">
+                <option value="">Все статусы</option>
+                <option value="new">Новые</option>
+                <option value="contacted">На связи</option>
+                <option value="won">Выиграны</option>
+                <option value="lost">Потеряны</option>
+            </select>
+            <input id="filter-q" type="search" placeholder="Поиск по имени, email, сообщению…">
+        </div>
+
+        <div id="leads-container">
+            <div class="empty-state">Загрузка…</div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+    const $ = (s) => document.querySelector(s);
+
+    const state = {
+        token: localStorage.getItem('admin.token') || '',
+        leads: [],
+    };
+
+    const STATUS_LABELS = {
+        new: 'Новый', contacted: 'На связи', won: 'Выигран', lost: 'Потерян'
+    };
+
+    /* ---------- auth ---------- */
+    function askToken() {
+        const t = prompt('Введи admin token (хранится в .env):');
+        if (!t) { location.href = '../'; return; }
+        state.token = t.trim();
+        localStorage.setItem('admin.token', state.token);
+        loadLeads();
+    }
+
+    function logout() {
+        if (!confirm('Очистить сохранённый токен?')) return;
+        localStorage.removeItem('admin.token');
+        state.token = '';
+        askToken();
+    }
+
+    /* ---------- api ---------- */
+    async function api(path, opts = {}) {
+        const res = await fetch(path, {
+            ...opts,
+            headers: {
+                'Authorization': 'Bearer ' + state.token,
+                'Content-Type': 'application/json',
+                ...(opts.headers || {}),
+            },
+        });
+        if (res.status === 401 || res.status === 403) {
+            showToast('Токен неверный', 'error');
+            localStorage.removeItem('admin.token');
+            state.token = '';
+            setTimeout(askToken, 800);
+            throw new Error('unauthorized');
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+    }
+
+    /* ---------- load ---------- */
+    async function loadLeads() {
+        if (!state.token) { askToken(); return; }
+
+        try {
+            state.leads = await api('/api/leads?limit=500');
+            render();
+        } catch (e) {
+            document.getElementById('leads-container').innerHTML =
+                `<div class="empty-state">⚠️ ${e.message}. <a href="#" onclick="askToken()" style="color: var(--c-accent)">Ввести токен</a></div>`;
+        }
+    }
+
+    async function updateStatus(id, status) {
+        try {
+            await api(`/api/leads/${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ status }),
+            });
+            const lead = state.leads.find(l => l.id === id);
+            if (lead) lead.status = status;
+            render();
+            showToast('Статус обновлён', 'success');
+        } catch (e) {
+            showToast('Ошибка: ' + e.message, 'error');
+        }
+    }
+
+    /* ---------- render ---------- */
+    function render() {
+        const filterStatus = $('#filter-status').value;
+        const filterQ = $('#filter-q').value.toLowerCase().trim();
+        const filtered = state.leads.filter(l => {
+            if (filterStatus && l.status !== filterStatus) return false;
+            if (filterQ) {
+                const hay = `${l.name} ${l.email} ${l.message}`.toLowerCase();
+                if (!hay.includes(filterQ)) return false;
+            }
+            return true;
+        });
+
+        // stats
+        $('#stat-total').textContent = state.leads.length;
+        $('#stat-new').textContent    = state.leads.filter(l => l.status === 'new').length;
+        $('#stat-won').textContent    = state.leads.filter(l => l.status === 'contacted' || l.status === 'won').length;
+        $('#stat-lost').textContent   = state.leads.filter(l => l.status === 'lost').length;
+
+        const container = $('#leads-container');
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="empty-state">${
+                state.leads.length === 0 ? 'Заявок пока нет. Отправь тестовую через сайт.' : 'Ничего не найдено по фильтру.'
+            }</div>`;
+            return;
+        }
+
+        const rows = filtered.map(l => {
+            const badge = `<span class="badge badge-${l.status}">${STATUS_LABELS[l.status] || l.status}</span>`;
+            const actions = l.status !== 'contacted' && l.status !== 'won' ? `
+                <button class="action-btn is-won" onclick="updateStatus(${l.id}, 'contacted')">В работу</button>` : '';
+            const wonBtn = l.status !== 'won' ? `
+                <button class="action-btn is-won" onclick="updateStatus(${l.id}, 'won')">Выиграно</button>` : '';
+            const lostBtn = l.status !== 'lost' ? `
+                <button class="action-btn is-lost" onclick="updateStatus(${l.id}, 'lost')">Потеряно</button>` : '';
+            const resetBtn = l.status !== 'new' ? `
+                <button class="action-btn is-reset" onclick="updateStatus(${l.id}, 'new')">Сброс</button>` : '';
+
+            const created = new Date(l.created_at).toLocaleString('ru-RU', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+            });
+
+            return `
+                <tr>
+                    <td data-label="ID">
+                        <strong>#${l.id}</strong>
+                        <div class="row-time">${created}</div>
+                        <div class="row-time">${escape(l.source || '—')}${l.lang ? ' · ' + l.lang : ''}</div>
+                    </td>
+                    <td data-label="От">
+                        <strong>${escape(l.name)}</strong>
+                        <div class="row-email"><a href="mailto:${escape(l.email)}">${escape(l.email)}</a></div>
+                    </td>
+                    <td data-label="Услуга">${escape(l.service)}</td>
+                    <td data-label="Сообщение"><div class="row-message">${escape(l.message)}</div></td>
+                    <td data-label="Статус">${badge}</td>
+                    <td data-label="Действия">${actions}${wonBtn}${lostBtn}${resetBtn}</td>
+                </tr>
+            `;
+        }).join('');
+
+        container.innerHTML = `
+            <table class="leads-table">
+                <thead>
+                    <tr>
+                        <th>ID / когда</th>
+                        <th>Кто</th>
+                        <th>Услуга</th>
+                        <th>Сообщение</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>
+        `;
+    }
+
+    function escape(s) {
+        if (s == null) return '';
+        return String(s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    /* ---------- toast ---------- */
+    let toastTimer;
+    function showToast(msg, type) {
+        const t = $('#toast');
+        t.textContent = msg;
+        t.className = 'toast is-visible is-' + type;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove('is-visible'), 2500);
+    }
+
+    /* ---------- events ---------- */
+    $('#filter-status').addEventListener('change', render);
+    $('#filter-q').addEventListener('input', render);
+    $('#refresh-btn').addEventListener('click', loadLeads);
+    $('#logout-btn').addEventListener('click', logout);
+
+    /* auto-refresh every 30s */
+    setInterval(() => { if (state.token) loadLeads(); }, 30000);
+
+    loadLeads();
+    </script>
+</body>
+</html>

@@ -130,7 +130,13 @@ Brings up Nginx → FastAPI → Telegram bot → PostgreSQL as four containers b
 | GET    | `/api/services` | none  | Public services catalog              |
 | GET    | `/api/health`   | none  | Liveness probe                       |
 | GET    | `/api/docs`     | none  | Swagger UI                           |
+| GET    | `/admin/`       | admin | Lead management UI (bearer prompt)  |
 | POST   | `/bot/webhook`  | none  | Telegram webhook receiver            |
+
+The admin dashboard at `/admin/` shows all leads with filtering by status
+and one-click status updates (`new` → `contacted` → `won` / `lost`).
+Auth is done in-browser: paste your `ADMIN_TOKEN` once, it gets cached in
+`localStorage`.
 
 ## Bot commands
 
