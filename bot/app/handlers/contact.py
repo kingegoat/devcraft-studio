@@ -5,12 +5,13 @@ import re
 from typing import Any
 
 from aiogram import Bot, F, Router
+from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from ..api_client import api
 from ..config import get_settings
-from ..keyboards import service_picker_kb
+from ..keyboards import cancel_kb, service_picker_kb
 from ..states import LeadForm
 
 router = Router(name="contact")
@@ -26,14 +27,15 @@ async def cb_pick_service(call: CallbackQuery, state: FSMContext) -> None:
     await state.set_state(LeadForm.description)
     await call.message.edit_text(
         "📝 *Опишите задачу кратко*\n\n"
-        "Что нужно сделать, какие сроки, есть ли примеры или референсы."
+        "Что нужно сделать, какие сроки, есть ли примеры или референсы.",
+        reply_markup=cancel_kb(),
     )
     await call.answer()
 
 
 @router.callback_query(F.data == "lead:cancel")
 async def cb_cancel(call: CallbackQuery, state: FSMContext) -> None:
-    """Cancel from any FSM step."""
+    """Cancel from any FSM step (inline button)."""
     await state.clear()
     await call.message.edit_text(
         "Отменено. Если что — /start",
@@ -42,22 +44,42 @@ async def cb_cancel(call: CallbackQuery, state: FSMContext) -> None:
     await call.answer()
 
 
+@router.message(Command("cancel"))
+@router.message(Command("exit"))
+async def cmd_cancel(message: Message, state: FSMContext) -> None:
+    """Cancel from any FSM step (command, works anywhere)."""
+    current = await state.get_state()
+    if current is None:
+        await message.answer(
+            "Нечего отменять. /start чтобы начать.",
+            reply_markup=service_picker_kb(),
+        )
+        return
+    await state.clear()
+    await message.answer(
+        "Отменено. Если что — /start",
+        reply_markup=service_picker_kb(),
+    )
+
+
 @router.message(LeadForm.description)
 async def fsm_description(message: Message, state: FSMContext) -> None:
     desc = (message.text or "").strip()
     if len(desc) < 5:
-        await message.answer("Пара слов точно нужно — что сделать?")
+        await message.answer("Пара слов точно нужно — что сделать?",
+                             reply_markup=cancel_kb())
         return
     await state.update_data(description=desc)
     await state.set_state(LeadForm.email)
-    await message.answer("📧 *Email для связи:*")
+    await message.answer("📧 *Email для связи:*", reply_markup=cancel_kb())
 
 
 @router.message(LeadForm.email)
 async def fsm_email(message: Message, state: FSMContext) -> None:
     email = (message.text or "").strip()
     if not EMAIL_RE.match(email):
-        await message.answer("Похоже, email некорректный. Попробуйте ещё раз:")
+        await message.answer("Похоже, email некорректный. Попробуйте ещё раз:",
+                             reply_markup=cancel_kb())
         return
 
     data: dict[str, Any] = await state.get_data()

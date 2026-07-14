@@ -19,3 +19,10 @@ def contacts_kb() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="⬅️ Назад", callback_data="menu:home")],
     ])
+
+
+def cancel_kb() -> InlineKeyboardMarkup:
+    """Inline «Отмена» — shown under every FSM prompt."""
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="❌ Отмена", callback_data="lead:cancel")],
+    ])
