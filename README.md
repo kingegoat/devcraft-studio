@@ -1,5 +1,16 @@
 # DevCraft Studio · monorepo
 
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](api/requirements.txt)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](api/)
+[![aiogram 3](https://img.shields.io/badge/aiogram-3.x-blue.svg)](bot/)
+[![Tests](https://img.shields.io/badge/tests-8%20passed-brightgreen.svg)](api/tests/)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+</div>
+
 Full-stack reference project: **marketing landing page + FastAPI backend + Telegram bot**, sharing one database and one deployment story.
 
 | Layer    | Stack                                                                                |
