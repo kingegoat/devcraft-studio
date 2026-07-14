@@ -40,7 +40,6 @@ async def cb_home(call: CallbackQuery, state: FSMContext) -> None:
 async def cb_contacts(call: CallbackQuery) -> None:
     await call.message.edit_text(
         "📞 *Контакты*\n\n"
-        "Telegram: @kingegoat\n"
         "Email: hello@devcraft.studio\n"
         "GitHub: github.com/kingegoat\n"
         "Сайт: github.com/kingegoat/devcraft-studio",
@@ -53,7 +52,6 @@ async def cb_contacts(call: CallbackQuery) -> None:
 async def cmd_contacts(message: Message) -> None:
     await message.answer(
         "📞 *Контакты*\n\n"
-        "Telegram: @kingegoat\n"
         "Email: hello@devcraft.studio\n"
         "GitHub: github.com/kingegoat\n"
         "Сайт: github.com/kingegoat/devcraft-studio",

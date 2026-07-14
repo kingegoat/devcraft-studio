@@ -13,7 +13,7 @@
 
 Instead, use one of these private channels:
 
-- **Email**: security@kingegoat.dev (or open a GitHub Security Advisory)
+- **Email**: see GitHub profile for the current address
 - **GitHub Security Advisories**: https://github.com/kingegoat/devcraft-studio/security/advisories/new
 
 Include in your report:
