@@ -1,4 +1,4 @@
-"""Contact form / lead intake FSM."""
+"""Lead intake FSM — one simple flow: service → description → email → done."""
 from __future__ import annotations
 
 import re
@@ -6,111 +6,125 @@ from typing import Any
 
 from aiogram import Bot, F, Router
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, Message
 
 from ..api_client import api
 from ..config import get_settings
-from ..i18n import i18n
-from ..keyboards import back_kb
+from ..keyboards import service_picker_kb
+from ..states import LeadForm
 
 router = Router(name="contact")
 
-EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
+EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$")
 
 
-class ContactForm(StatesGroup):
-    waiting_name = State()
-    waiting_email = State()
-    waiting_message = State()
-
-
-@router.callback_query(F.data == "menu:contact")
-async def cb_contact(call: CallbackQuery, lang: str, state: FSMContext) -> None:
-    await state.set_state(ContactForm.waiting_name)
-    await call.message.edit_text(i18n.t(lang, "contact.ask_name"))
+@router.callback_query(F.data.startswith("svc:"))
+async def cb_pick_service(call: CallbackQuery, state: FSMContext) -> None:
+    """User picked a service from /start menu."""
+    service = call.data.split(":", 1)[1]
+    await state.update_data(service=service)
+    await state.set_state(LeadForm.description)
+    await call.message.edit_text(
+        "📝 *Опишите задачу кратко*\n\n"
+        "Что нужно сделать, какие сроки, есть ли примеры или референсы."
+    )
     await call.answer()
 
 
-@router.callback_query(F.data.startswith("order:"))
-async def cb_order(call: CallbackQuery, lang: str, state: FSMContext) -> None:
-    """When user clicks 'order this service' on the services screen."""
-    slug = call.data.split(":", 1)[1]
-    await state.set_state(ContactForm.waiting_name)
-    await state.update_data(service=slug)
-    await call.message.edit_text(i18n.t(lang, "contact.ask_name"))
+@router.callback_query(F.data == "lead:cancel")
+async def cb_cancel(call: CallbackQuery, state: FSMContext) -> None:
+    """Cancel from any FSM step."""
+    await state.clear()
+    await call.message.edit_text(
+        "Отменено. Если что — /start",
+        reply_markup=service_picker_kb(),
+    )
     await call.answer()
 
 
-@router.message(ContactForm.waiting_name)
-async def fsm_name(message: Message, lang: str, state: FSMContext) -> None:
-    name = (message.text or "").strip()
-    if len(name) < 2:
-        await message.answer(i18n.t(lang, "contact.ask_name"))
+@router.message(LeadForm.description)
+async def fsm_description(message: Message, state: FSMContext) -> None:
+    desc = (message.text or "").strip()
+    if len(desc) < 5:
+        await message.answer("Пара слов точно нужно — что сделать?")
         return
-    await state.update_data(name=name)
-    await state.set_state(ContactForm.waiting_email)
-    await message.answer(i18n.t(lang, "contact.ask_email"))
+    await state.update_data(description=desc)
+    await state.set_state(LeadForm.email)
+    await message.answer("📧 *Email для связи:*")
 
 
-@router.message(ContactForm.waiting_email)
-async def fsm_email(message: Message, lang: str, state: FSMContext) -> None:
+@router.message(LeadForm.email)
+async def fsm_email(message: Message, state: FSMContext) -> None:
     email = (message.text or "").strip()
     if not EMAIL_RE.match(email):
-        await message.answer(i18n.t(lang, "contact.invalid_email"))
-        return
-    await state.update_data(email=email)
-    await state.set_state(ContactForm.waiting_message)
-    await message.answer(i18n.t(lang, "contact.ask_message"))
-
-
-@router.message(ContactForm.waiting_message)
-async def fsm_message(message: Message, lang: str, state: FSMContext) -> None:
-    text = (message.text or "").strip()
-    if len(text) < 5:
-        await message.answer(i18n.t(lang, "contact.ask_message"))
+        await message.answer("Похоже, email некорректный. Попробуйте ещё раз:")
         return
 
     data: dict[str, Any] = await state.get_data()
-    service = data.get("service", "other")
+    user = message.from_user
+    name = (user.first_name or "") + (f" {user.last_name}" if user.last_name else "")
+    name = name.strip() or "Telegram user"
 
     # Persist via API
+    lead_id: Any = "?"
     try:
         result = await api.create_lead({
-            "name": data["name"],
-            "email": data["email"],
-            "service": service,
-            "message": text,
+            "name": name,
+            "email": email,
+            "service": data["service"],
+            "message": data["description"],
             "source": "telegram",
-            "lang": lang,
+            "lang": "ru",
         })
         lead_id = result.get("id", "?")
     except Exception:  # noqa: BLE001
-        lead_id = "?"
+        pass
 
-    # Notify admins (best-effort, no failure side-effect on user)
-    await _notify_admins(message.bot, lead_id, data, service, text, lang)
+    # Notify admins (best effort)
+    await _notify_admins(message.bot, lead_id, name, email, user, data)
 
     await message.answer(
-        i18n.t(lang, "contact.thanks", name=data["name"], id=lead_id),
-        reply_markup=back_kb({"back": i18n.t(lang, "menu.back")}),
+        f"✅ *Заявка #{lead_id} принята!*\n\n"
+        f"Свяжусь с вами по email в течение 2 часов.\n\n"
+        f"Если что-то ещё — /start",
     )
     await state.clear()
 
 
-async def _notify_admins(bot: Bot, lead_id: Any, data: dict, service: str, message: str, lang: str) -> None:
+async def _notify_admins(bot: Bot, lead_id: Any, name: str, email: str,
+                         user, data: dict) -> None:
     settings = get_settings()
     if not settings.admin_ids:
         return
+
+    service_labels = {
+        "landing": "🌐 Лендинг / сайт",
+        "bot": "🤖 Telegram-бот",
+        "api": "⚙️ API / backend",
+        "other": "📝 Другое",
+    }
+    service_label = service_labels.get(data.get("service", ""), data.get("service", ""))
+
     text = (
-        f"📩 *New lead #{lead_id}* (lang: {lang})\n\n"
-        f"👤 {data.get('name', '?')}\n"
-        f"📧 {data.get('email', '?')}\n"
-        f"🛠 {service}\n"
-        f"💬 {message}"
+        f"📩 *Новая заявка #{lead_id}*\n\n"
+        f"Услуга: {service_label}\n"
+        f"Имя: {name}\n"
+        f"Email: {email}\n"
+        f"Username: @{user.username or '—'} (id {user.id})\n\n"
+        f"💬 _{data.get('description', '')}_"
     )
+
     for admin_id in settings.admin_ids:
         try:
             await bot.send_message(admin_id, text, parse_mode="Markdown")
         except Exception:  # noqa: BLE001
             pass
+
+
+@router.message()
+async def fallback(message: Message, state: FSMContext) -> None:
+    """Catch-all: any text outside FSM jumps to /start."""
+    current = await state.get_state()
+    if current is not None:
+        return  # let FSM handlers do their thing
+    await cmd_start(message, state)

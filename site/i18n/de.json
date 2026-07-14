@@ -6,14 +6,13 @@
     "nav": {
         "skip": "Zum Inhalt springen",
         "services": "Leistungen",
-        "work": "Arbeiten",
         "process": "Prozess",
         "stack": "Stack",
         "contact": "Kontakt",
         "cta": "Projekt starten"
     },
     "hero": {
-        "eyebrow": "Offen für Projekte in Q3",
+        "eyebrow": "Verfügbar für neue Aufträge",
         "title": {
             "1": "Ich baue Produkte,",
             "2": "die Menschen nutzen."
@@ -21,12 +20,7 @@
         "sub": "Landingpages, Telegram-Bots, FastAPI Web-Services. Komplette Umsetzung: von Idee und Design bis Deployment und Analytics. Sauberer Code, schnelle Lieferung, kein Boilerplate.",
         "cta": {
             "primary": "Projekt starten",
-            "secondary": "Arbeiten ansehen"
-        },
-        "stats": {
-            "1": "Projekte",
-            "2": "Jahre Erfahrung",
-            "3": "UI-Sprachen"
+            "secondary": "Was ich tue"
         }
     },
     "services": {
@@ -54,31 +48,6 @@
             "f1": "REST + WebSocket",
             "f2": "JWT, OAuth2",
             "f3": "CI/CD und Monitoring"
-        }
-    },
-    "work": {
-        "eyebrow": "Ausgewählte Arbeiten",
-        "title": "Projekte",
-        "lead": "Live-Projekte — Open Source auf GitHub. Code einsehen, deployen, forken.",
-        "1": {
-            "tag": "Landing",
-            "title": "Fintess — Fitnesstrainer",
-            "text": "Responsive Landing mit Kursbuchung und Telegram-Integration."
-        },
-        "2": {
-            "tag": "SaaS",
-            "title": "LeadFlow — Leads CRM",
-            "text": "FastAPI + PostgreSQL Web-Service mit Telegram-Benachrichtigungen."
-        },
-        "3": {
-            "tag": "Bot",
-            "title": "OrderBot — Bestellannahme",
-            "text": "aiogram 3 Telegram-Bot mit FSM, Zahlungen und Admin-Panel."
-        },
-        "4": {
-            "tag": "Mehrsprachig",
-            "title": "Polyglot UI",
-            "text": "UI-Kit mit RU/EN/DE/ES/FR Wechsel ohne Seiten-Neuladen."
         }
     },
     "process": {

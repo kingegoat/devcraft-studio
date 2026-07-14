@@ -42,7 +42,6 @@
 
             <nav class="nav-primary" aria-label="Primary">
                 <a href="#services" data-i18n="nav.services">Услуги</a>
-                <a href="#portfolio" data-i18n="nav.work">Работы</a>
                 <a href="#process" data-i18n="nav.process">Процесс</a>
                 <a href="#stack" data-i18n="nav.stack">Стек</a>
                 <a href="#contact" data-i18n="nav.contact">Контакты</a>
@@ -81,7 +80,6 @@
 
         <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
             <a href="#services" data-i18n="nav.services">Услуги</a>
-            <a href="#portfolio" data-i18n="nav.work">Работы</a>
             <a href="#process" data-i18n="nav.process">Процесс</a>
             <a href="#stack" data-i18n="nav.stack">Стек</a>
             <a href="#contact" data-i18n="nav.contact">Контакты</a>
@@ -101,7 +99,7 @@
                 <div class="hero-copy">
                     <span class="eyebrow">
                         <span class="dot"></span>
-                        <span data-i18n="hero.eyebrow">Открыт для проектов в Q3</span>
+                        <span data-i18n="hero.eyebrow">Принимаю заказы</span>
                     </span>
                     <h1 class="hero-title">
                         <span data-i18n="hero.title.1">Делаю продукты,</span>
@@ -115,22 +113,8 @@
                             <span data-i18n="hero.cta.primary">Начать проект</span>
                             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </a>
-                        <a class="btn btn-ghost" href="#portfolio" data-i18n="hero.cta.secondary">Смотреть работы</a>
+                        <a class="btn btn-ghost" href="#services" data-i18n="hero.cta.secondary">Что делаю</a>
                     </div>
-                    <ul class="hero-stats" role="list">
-                        <li>
-                            <strong>40+</strong>
-                            <span data-i18n="hero.stats.1">проектов</span>
-                        </li>
-                        <li>
-                            <strong>5 лет</strong>
-                            <span data-i18n="hero.stats.2">в разработке</span>
-                        </li>
-                        <li>
-                            <strong>12+</strong>
-                            <span data-i18n="hero.stats.3">языков интерфейса</span>
-                        </li>
-                    </ul>
                 </div>
                 <div class="hero-visual" aria-hidden="true">
                     <div class="code-card">
@@ -231,55 +215,6 @@ dp  <span class="c-op">=</span> <span class="c-fn">Dispatcher</span>()
                         </ul>
                         <span class="card-arrow" aria-hidden="true">→</span>
                     </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ PORTFOLIO ============ -->
-        <section class="section section-alt" id="portfolio">
-            <div class="container">
-                <header class="section-head">
-                    <span class="section-eyebrow" data-i18n="work.eyebrow">Избранное</span>
-                    <h2 class="section-title" data-i18n="work.title">Работы</h2>
-                    <p class="section-lead" data-i18n="work.lead">Живые проекты — открытые репозитории на GitHub. Код можно посмотреть, развернуть, форкнуть.</p>
-                </header>
-                <div class="work-grid">
-                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
-                        <div class="work-cover work-cover-1" aria-hidden="true"></div>
-                        <div class="work-meta">
-                            <span class="work-tag" data-i18n="work.1.tag">Лендинг</span>
-                            <h3 data-i18n="work.1.title">Fintess — фитнес-тренер</h3>
-                            <p data-i18n="work.1.text">Адаптивный лендинг с записью на тренировки и интеграцией Telegram.</p>
-                            <div class="work-stack"><span>HTML</span><span>CSS</span><span>JS</span></div>
-                        </div>
-                    </a>
-                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
-                        <div class="work-cover work-cover-2" aria-hidden="true"></div>
-                        <div class="work-meta">
-                            <span class="work-tag" data-i18n="work.2.tag">SaaS</span>
-                            <h3 data-i18n="work.2.title">LeadFlow — CRM лидов</h3>
-                            <p data-i18n="work.2.text">Веб-сервис на FastAPI + PostgreSQL с Telegram-уведомлениями.</p>
-                            <div class="work-stack"><span>Python</span><span>FastAPI</span><span>Postgres</span></div>
-                        </div>
-                    </a>
-                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
-                        <div class="work-cover work-cover-3" aria-hidden="true"></div>
-                        <div class="work-meta">
-                            <span class="work-tag" data-i18n="work.3.tag">Bot</span>
-                            <h3 data-i18n="work.3.title">OrderBot — приём заказов</h3>
-                            <p data-i18n="work.3.text">Telegram-бот на aiogram 3 с FSM, оплатой и админ-панелью.</p>
-                            <div class="work-stack"><span>aiogram</span><span>SQLite</span><span>Docker</span></div>
-                        </div>
-                    </a>
-                    <a class="work-card" href="https://github.com/" target="_blank" rel="noopener">
-                        <div class="work-cover work-cover-4" aria-hidden="true"></div>
-                        <div class="work-meta">
-                            <span class="work-tag" data-i18n="work.4.tag">Multilang</span>
-                            <h3 data-i18n="work.4.title">Polyglot UI</h3>
-                            <p data-i18n="work.4.text">UI-кит с переключением RU/EN/DE/ES/FR без перезагрузки страницы.</p>
-                            <div class="work-stack"><span>i18n</span><span>CSS vars</span><span>Vanilla JS</span></div>
-                        </div>
-                    </a>
                 </div>
             </div>
         </section>
@@ -444,7 +379,7 @@ dp  <span class="c-op">=</span> <span class="c-fn">Dispatcher</span>()
             </div>
             <div class="footer-links">
                 <a href="#services" data-i18n="nav.services">Услуги</a>
-                <a href="#portfolio" data-i18n="nav.work">Работы</a>
+                <a href="#process" data-i18n="nav.process">Процесс</a>
                 <a href="#contact" data-i18n="nav.contact">Контакты</a>
             </div>
             <div class="footer-meta">
