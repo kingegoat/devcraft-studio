@@ -36,13 +36,19 @@ async def cb_home(call: CallbackQuery, state: FSMContext) -> None:
     await call.answer()
 
 
+def _contacts_text() -> str:
+    return (
+        "📞 *Контакты*\n\n"
+        "Все общение — в этом чате. Чтобы оставить заявку, нажмите /start.\n\n"
+        "Исходный код проектов — на GitHub:\n"
+        "github.com/kingegoat/devcraft-studio"
+    )
+
+
 @router.callback_query(F.data == "menu:contacts")
 async def cb_contacts(call: CallbackQuery) -> None:
     await call.message.edit_text(
-        "📞 *Контакты*\n\n"
-        "Email: hello@devcraft.studio\n"
-        "GitHub: github.com/kingegoat\n"
-        "Сайт: github.com/kingegoat/devcraft-studio",
+        _contacts_text(),
         reply_markup=contacts_kb(),
     )
     await call.answer()
@@ -50,12 +56,7 @@ async def cb_contacts(call: CallbackQuery) -> None:
 
 @router.message(Command("contacts"))
 async def cmd_contacts(message: Message) -> None:
-    await message.answer(
-        "📞 *Контакты*\n\n"
-        "Email: hello@devcraft.studio\n"
-        "GitHub: github.com/kingegoat\n"
-        "Сайт: github.com/kingegoat/devcraft-studio",
-    )
+    await message.answer(_contacts_text())
 
 
 @router.message(Command("help"))
@@ -63,7 +64,7 @@ async def cmd_help(message: Message) -> None:
     await message.answer(
         "ℹ️ *Помощь*\n\n"
         "/start — оставить заявку\n"
-        "/contacts — мои контакты\n"
+        "/contacts — контакты\n"
         "/cancel — выйти из текущего шага\n"
         "/help — эта справка\n\n"
         "Или просто напишите что нужно — разберёмся.",
